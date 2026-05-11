@@ -1,6 +1,6 @@
 package com.monish.producer.generator;
 
-import com.monish.producer.model.LogEvent;
+import com.monish.common.model.LogEvent;
 import com.monish.producer.service.KafkaProducerService;
 import java.time.LocalDateTime;
 import java.util.Random;

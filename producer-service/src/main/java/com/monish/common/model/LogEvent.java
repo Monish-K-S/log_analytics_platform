@@ -1,4 +1,4 @@
-package com.monish.processing.model;
+package com.monish.common.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;

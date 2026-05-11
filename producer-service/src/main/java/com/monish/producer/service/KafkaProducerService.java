@@ -1,6 +1,6 @@
 package com.monish.producer.service;
 
-import com.monish.producer.model.LogEvent;
+import com.monish.common.model.LogEvent;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
