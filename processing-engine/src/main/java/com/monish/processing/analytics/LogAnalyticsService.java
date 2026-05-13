@@ -3,7 +3,9 @@ package com.monish.processing.analytics;
 import com.monish.common.model.LogEvent;
 import com.monish.processing.entity.LogEntity;
 import com.monish.processing.repository.LogRepository;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -53,4 +55,24 @@ public class LogAnalyticsService {
             System.out.println("Current Error Count: " + errorCount);
         }
     }
+
+    public Map<String, Integer> getLevelCounts() {
+        return this.levelCounts;
+    }
+
+    public Map<String, Integer> getServiceCounts() {
+        return this.serviceCounts;
+    }
+
+    public List<Map.Entry<String, Integer>> getTopServices() {
+        List<Map.Entry<String, Integer>> sortedServices = serviceCounts
+            .entrySet()
+            .stream()
+            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+            .toList();
+
+        return sortedServices;
+    }
+
+    public Map<String, Object> getErrorSummary() {}
 }
