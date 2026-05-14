@@ -74,5 +74,21 @@ public class LogAnalyticsService {
         return sortedServices;
     }
 
-    public Map<String, Object> getErrorSummary() {}
+    public Map<String, Object> getErrorSummary() {
+        Map<String, Object> summary = new HashMap<>();
+        int errorCount = levelCounts.getOrDefault("ERROR", 0);
+        int totalLogs = levelCounts
+            .values()
+            .stream()
+            .mapToInt(Integer::intValue)
+            .sum();
+        double errorPercentage = (totalLogs > 0)
+            ? ((double) errorCount / totalLogs) * 100
+            : 0.0;
+
+        summary.put("errorCount", errorCount);
+        summary.put("totalLogs", totalLogs);
+        summary.put("errorPercentage", errorPercentage);
+        return summary;
+    }
 }

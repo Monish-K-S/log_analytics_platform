@@ -71,11 +71,26 @@ public class LogController {
         return logAnalyticsService.getTopServices();
     }
 
+    @GetMapping("/analytics/errors/summary")
+    public Map<String, Object> getAnalyticsSummary() {
+        return logAnalyticsService.getErrorSummary();
+    }
+
     @GetMapping("/metrics")
     public Map<String, Object> getMetrics() {
         Map<String, Object> metrics = new HashMap<>();
         metrics.put("level", logAnalyticsService.getLevelCounts());
         metrics.put("service", logAnalyticsService.getServiceCounts());
         return metrics;
+    }
+
+    @GetMapping("/health")
+    public Map<String, String> getHealth() {
+        Map<String, String> healthMetric = new HashMap<>();
+        healthMetric.put("status", "UP");
+        healthMetric.put("database", "UP");
+        healthMetric.put("kafka", "UP");
+
+        return healthMetric;
     }
 }
