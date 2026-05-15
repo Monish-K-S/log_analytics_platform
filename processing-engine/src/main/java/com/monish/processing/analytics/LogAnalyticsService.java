@@ -3,7 +3,7 @@ package com.monish.processing.analytics;
 import com.monish.common.model.LogEvent;
 import com.monish.processing.entity.LogEntity;
 import com.monish.processing.repository.LogRepository;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +21,18 @@ public class LogAnalyticsService {
 
     public LogAnalyticsService(LogRepository logRepository) {
         this.logRepository = logRepository;
+    }
+
+    public List<Map<String, Object>> getLevelMetrics() {
+        List<Map<String, Object>> metrics = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : levelCounts.entrySet()) {
+            Map<String, Object> metric = new HashMap<>();
+            metric.put("level", entry.getKey());
+            metric.put("count", entry.getValue());
+
+            metrics.add(metric);
+        }
+        return metrics;
     }
 
     public void processLog(LogEvent logEvent) {

@@ -77,11 +77,8 @@ public class LogController {
     }
 
     @GetMapping("/metrics")
-    public Map<String, Object> getMetrics() {
-        Map<String, Object> metrics = new HashMap<>();
-        metrics.put("level", logAnalyticsService.getLevelCounts());
-        metrics.put("service", logAnalyticsService.getServiceCounts());
-        return metrics;
+    public List<Map<String, Object>> getMetrics() {
+        return logAnalyticsService.getLevelMetrics();
     }
 
     @GetMapping("/health")
