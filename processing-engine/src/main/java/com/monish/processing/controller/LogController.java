@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -89,5 +88,10 @@ public class LogController {
         healthMetric.put("kafka", "UP");
 
         return healthMetric;
+    }
+
+    @GetMapping("/analytics/anomalies")
+    public List<Map<String, String>> getAnomalies() {
+        return logAnalyticsService.getAnomalies();
     }
 }

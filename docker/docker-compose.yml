@@ -23,7 +23,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   postgres:
@@ -48,5 +48,29 @@ services:
     environment:
       GF_INSTALL_PLUGINS: yesoreyeram-infinity-datasource
 
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
     depends_on:
       - postgres
+
+  processing-engine:
+    image: processing-engine
+    container_name: processing-engine
+
+    depends_on:
+      - kafka
+      - postgres
+
+    ports:
+      - "8082:8082"
+
+  producer-service:
+    image: producer-service
+    container_name: producer-service
+
+    depends_on:
+      - kafka
+
+volumes:
+  grafana-storage:

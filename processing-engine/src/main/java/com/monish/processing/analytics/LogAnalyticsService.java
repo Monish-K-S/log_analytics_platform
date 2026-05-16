@@ -103,4 +103,26 @@ public class LogAnalyticsService {
         summary.put("errorPercentage", errorPercentage);
         return summary;
     }
+
+    public List<Map<String, String>> getAnomalies() {
+        List<Map<String, String>> anomalies = new ArrayList<>();
+        int errorCount = levelCounts.getOrDefault("ERROR", 0);
+        int totalLogs = levelCounts
+            .values()
+            .stream()
+            .mapToInt(Integer::intValue)
+            .sum();
+        double errorPercentage = (totalLogs > 0)
+            ? ((double) errorCount / totalLogs) * 100
+            : 0.0;
+
+        if (errorPercentage > 40) {
+            Map<String, String> anomaly = new HashMap<>();
+            anomaly.put("Type", "HIGH ERROR RATE");
+            anomaly.put("Message", "Error percentage exceeded 40");
+            anomalies.add(anomaly);
+        }
+
+        return anomalies;
+    }
 }
