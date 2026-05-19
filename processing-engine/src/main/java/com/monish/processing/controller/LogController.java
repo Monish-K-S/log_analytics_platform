@@ -3,6 +3,8 @@ package com.monish.processing.controller;
 import com.monish.processing.analytics.LogAnalyticsService;
 import com.monish.processing.entity.LogEntity;
 import com.monish.processing.repository.LogRepository;
+import com.monish.processing.service.LuceneIndexService;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,13 +22,15 @@ public class LogController {
 
     private final LogRepository logRepository;
     private final LogAnalyticsService logAnalyticsService;
-
+    private final LuceneIndexService luceneIndexService;
     public LogController(
         LogRepository logRepository,
-        LogAnalyticsService logAnalyticsService
+        LogAnalyticsService logAnalyticsService,
+        LuceneIndexService luceneIndexService
     ) {
         this.logRepository = logRepository;
         this.logAnalyticsService = logAnalyticsService;
+        this.luceneIndexService = luceneIndexService;
     }
 
     @GetMapping("/logs")
@@ -93,5 +98,9 @@ public class LogController {
     @GetMapping("/analytics/anomalies")
     public List<Map<String, String>> getAnomalies() {
         return logAnalyticsService.getAnomalies();
+    }
+    @GetMapping("/search")
+    public List<Map<String,String>> searchLogs(@RequestParam String query) throws Exception{
+        return luceneIndexService.searchLogs(query);
     }
 }

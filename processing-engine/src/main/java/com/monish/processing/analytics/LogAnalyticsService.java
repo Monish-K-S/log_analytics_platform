@@ -3,6 +3,9 @@ package com.monish.processing.analytics;
 import com.monish.common.model.LogEvent;
 import com.monish.processing.entity.LogEntity;
 import com.monish.processing.repository.LogRepository;
+import com.monish.processing.service.LuceneIndexService;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,9 +21,11 @@ public class LogAnalyticsService {
     private static final int ERROR_THRESHOLD = 10;
 
     private final LogRepository logRepository;
+    private final LuceneIndexService luceneIndexService;
 
-    public LogAnalyticsService(LogRepository logRepository) {
+    public LogAnalyticsService(LogRepository logRepository, LuceneIndexService luceneIndexService) {
         this.logRepository = logRepository;
+        this.luceneIndexService = luceneIndexService;
     }
 
     public List<Map<String, Object>> getLevelMetrics() {
@@ -52,7 +57,13 @@ public class LogAnalyticsService {
         logEntity.setService(logEvent.getService());
         logEntity.setMessage(logEvent.getMessage());
         logRepository.save(logEntity);
+        try{
+        luceneIndexService.indexLog(logEntity);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
+
 
     @Scheduled(fixedRate = 10000)
     public void printAnalytics() {
@@ -118,8 +129,8 @@ public class LogAnalyticsService {
 
         if (errorPercentage > 40) {
             Map<String, String> anomaly = new HashMap<>();
-            anomaly.put("Type", "HIGH ERROR RATE");
-            anomaly.put("Message", "Error percentage exceeded 40");
+            anomaly.put("type", "HIGH ERROR RATE");
+            anomaly.put("message", "Error percentage exceeded 40");
             anomalies.add(anomaly);
         }
 
