@@ -2,7 +2,7 @@
 
 A distributed real-time observability platform built using **Spring Boot, Apache Kafka, PostgreSQL, Grafana, Docker, and Apache Lucene**.
 
-This platform ingests streaming logs, processes analytics in real time, detects operational anomalies, supports full-text search, and visualizes live metrics through Grafana dashboards.
+This platform ingests streaming logs, processes analytics in real time, detects operational anomalies, supports full-text search, and visualizes live metrics through Grafana dashboards. 
 
 ---
 
@@ -20,6 +20,8 @@ This platform ingests streaming logs, processes analytics in real time, detects 
 * Event-driven asynchronous architecture
 * Continuous streaming analytics
 
+---
+
 ## 📊 Live Analytics
 
 * Log level aggregation
@@ -27,11 +29,15 @@ This platform ingests streaming logs, processes analytics in real time, detects 
 * Error summaries and metrics
 * Top active services tracking
 
+---
+
 ## 🚨 Anomaly Detection
 
 * Detects unusually high error rates
 * Real-time operational anomaly monitoring
 * Exposes anomaly APIs for observability workflows
+
+---
 
 ## 🔍 Full-Text Search
 
@@ -39,17 +45,23 @@ This platform ingests streaming logs, processes analytics in real time, detects 
 * Fast keyword-based log search
 * Search indexed logs in real time
 
+---
+
 ## 📈 Observability Dashboard
 
 * Grafana dashboard integration
 * Live operational visualization
 * Metrics and analytics monitoring
 
+---
+
 ## 🐳 Containerized Infrastructure
 
 * Fully Dockerized architecture
 * Multi-service orchestration using Docker Compose
 * Production-style local deployment
+
+---
 
 ## ✅ Testing
 
@@ -67,19 +79,19 @@ This platform ingests streaming logs, processes analytics in real time, detects 
 
 ---
 
-## 🔍 Lucene Search API
+## 🔍 Full Text Search Results
 
 ![Search API](screenshots/search_result.png)
 
 ---
 
-## 🚨 Anomaly Detection API
+## 📘 Swagger / OpenAPI Documentation
 
-![Anomaly API](screenshots/api_endpoints_1.png)
-![Anomaly API](screenshots/api_endpoints_2.png)
+![Swagger UI](screenshots/api_endpoints_1.png)
+
+![Swagger Endpoints](screenshots/api_endpoints_2.png)
 
 ---
-
 
 # 🧰 Tech Stack
 
@@ -173,56 +185,29 @@ Visualizes analytics and observability metrics.
 
 # 📡 API Endpoints
 
-## 📊 Metrics API
-
-```http
-GET /metrics
-```
-
-### Returns
-
-* Log level distribution
-* Service distribution
-* Aggregated analytics
-* Operational summaries
-
----
-
-## 🔍 Search API
-
-```http
-GET /search?query=database
-```
-
-### Example Response
-
-```json
-[
-  {
-    "service": "payment-service",
-    "level": "ERROR",
-    "message": "Database connection timeout"
-  }
-]
-```
+| Method | Endpoint                                | Description                                     |
+| ------ | --------------------------------------- | ----------------------------------------------- |
+| GET    | `/metrics`                              | Returns log analytics and aggregated metrics    |
+| GET    | `/search?query=database`                | Performs full-text log search using Lucene      |
+| GET    | `/analytics/anomalies`                  | Returns detected anomalies based on error rates |
+| GET    | `/analytics/errors/summary`             | Returns error statistics and summaries          |
+| GET    | `/analytics/top-services`               | Returns most active services                    |
+| GET    | `/logs`                                 | Returns all stored logs                         |
+| GET    | `/logs/recent/{count}`                  | Returns most recent logs                        |
+| GET    | `/logs/level/{level}`                   | Filters logs by level                           |
+| GET    | `/logs/service/{service}`               | Filters logs by service                         |
+| GET    | `/logs/service/{service}/level/{level}` | Filters logs by service and level               |
+| GET    | `/logs/since/{minutes}`                 | Returns logs from recent time window            |
+| GET    | `/health`                               | Service health check endpoint                   |
 
 ---
 
-## 🚨 Anomaly Detection API
+# 📘 Swagger / OpenAPI Documentation
 
-```http
-GET /analytics/anomalies
-```
+Interactive API documentation is available at:
 
-### Example Response
-
-```json
-[
-  {
-    "type": "HIGH_ERROR_RATE",
-    "message": "Error percentage exceeded 40%"
-  }
-]
+```text
+http://localhost:8082/swagger-ui/index.html
 ```
 
 ---
@@ -332,5 +317,3 @@ Run unit tests:
 # 👨‍💻 Author
 
 **Monish Gowda**
-
-
