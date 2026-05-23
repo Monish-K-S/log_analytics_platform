@@ -1,95 +1,202 @@
-Log Analytics & Observability Platform
+# 🚀 Real-Time Log Analytics & Observability Platform
 
-A distributed real-time log analytics platform built using Spring Boot, Apache Kafka, PostgreSQL, Grafana, Docker, and Apache Lucene.
+A distributed real-time observability platform built using **Spring Boot, Apache Kafka, PostgreSQL, Grafana, Docker, and Apache Lucene**.
 
-The platform ingests streaming logs, processes analytics in real time, detects anomalies, supports full-text log search, and visualizes operational metrics through Grafana dashboards.
+This platform ingests streaming logs, processes analytics in real time, detects operational anomalies, supports full-text search, and visualizes live metrics through Grafana dashboards.
 
-Features
-Real-time log ingestion using Kafka
-Distributed event-driven architecture
-Live analytics processing
-Error rate anomaly detection
-Full-text log search using Apache Lucene
-Grafana dashboard visualization
-Dockerized multi-service deployment
-REST APIs for metrics and search
-Unit tested analytics pipeline
-Architecture
-Producer Service
-       │
-       ▼
-Apache Kafka
-       │
-       ▼
-Processing Engine
- ├── PostgreSQL (log persistence)
- ├── Lucene (search indexing)
- ├── Analytics Engine
- └── REST APIs
-       │
-       ▼
-Grafana Dashboard
-Tech Stack
-Backend
-Java 21
-Spring Boot 3
-Spring Kafka
-Spring Data JPA
-Infrastructure
-Apache Kafka
-Zookeeper
-PostgreSQL
-Docker & Docker Compose
-Observability
-Grafana
-Search
-Apache Lucene
-Testing
-JUnit 5
-Mockito
-System Components
-Producer Service
+---
 
-Generates and publishes log events to Kafka topics.
+# 🏗️ Architecture
 
-Kafka
+![Architecture Diagram](screenshots/architecture_diagram.png)
 
-Acts as the distributed event streaming platform.
+---
 
-Processing Engine
+# ✨ Features
 
-Consumes logs from Kafka and performs:
+## 📡 Real-Time Streaming
 
-analytics aggregation
-anomaly detection
-Lucene indexing
-persistence to PostgreSQL
-PostgreSQL
+* Kafka-based distributed log ingestion pipeline
+* Event-driven asynchronous architecture
+* Continuous streaming analytics
 
-Stores processed log data.
+## 📊 Live Analytics
 
-Lucene
+* Log level aggregation
+* Service-wise log distribution
+* Error summaries and metrics
+* Top active services tracking
 
-Provides full-text search capabilities for logs.
+## 🚨 Anomaly Detection
 
-Grafana
+* Detects unusually high error rates
+* Real-time operational anomaly monitoring
+* Exposes anomaly APIs for observability workflows
 
-Visualizes live operational metrics and analytics.
+## 🔍 Full-Text Search
 
-APIs
-Metrics Endpoint
+* Apache Lucene powered search engine
+* Fast keyword-based log search
+* Search indexed logs in real time
+
+## 📈 Observability Dashboard
+
+* Grafana dashboard integration
+* Live operational visualization
+* Metrics and analytics monitoring
+
+## 🐳 Containerized Infrastructure
+
+* Fully Dockerized architecture
+* Multi-service orchestration using Docker Compose
+* Production-style local deployment
+
+## ✅ Testing
+
+* Unit tested analytics pipeline
+* Anomaly detection verification
+* Mockito-based dependency mocking
+
+---
+
+# 📸 Screenshots
+
+## 📊 Grafana Dashboard
+
+![Grafana Dashboard](screenshots/dashboard.png)
+
+---
+
+## 🔍 Lucene Search API
+
+![Search API](screenshots/search_results.png)
+
+---
+
+## 🚨 Anomaly Detection API
+
+![Anomaly API](screenshots/api_endpoints_1.png)
+![Anomaly API](screenshots/api_endpoints_2.png)
+
+---
+
+
+# 🧰 Tech Stack
+
+| Category       | Technologies            |
+| -------------- | ----------------------- |
+| Backend        | Java 21, Spring Boot 3  |
+| Streaming      | Apache Kafka, Zookeeper |
+| Database       | PostgreSQL              |
+| Search Engine  | Apache Lucene           |
+| Observability  | Grafana                 |
+| Infrastructure | Docker, Docker Compose  |
+| Testing        | JUnit 5, Mockito        |
+
+---
+
+# ⚙️ Core Components
+
+## 🟢 Producer Service
+
+Generates and publishes log events into Kafka topics.
+
+### Responsibilities
+
+* Simulated log generation
+* Event publishing
+* Kafka producer integration
+
+---
+
+## 🟠 Kafka
+
+Acts as the distributed event streaming backbone.
+
+### Responsibilities
+
+* Decoupled communication
+* Streaming transport
+* Asynchronous event delivery
+
+---
+
+## 🔵 Processing Engine
+
+Core analytics service responsible for processing incoming logs.
+
+### Responsibilities
+
+* Kafka consumption
+* Analytics aggregation
+* PostgreSQL persistence
+* Lucene indexing
+* Anomaly detection
+* REST API exposure
+
+---
+
+## 🟣 PostgreSQL
+
+Stores processed log records.
+
+### Responsibilities
+
+* Persistent storage
+* Structured log retention
+
+---
+
+## 🟡 Apache Lucene
+
+Provides full-text indexing and search capabilities.
+
+### Responsibilities
+
+* Log indexing
+* Keyword-based search
+* Fast retrieval of matching logs
+
+---
+
+## 🔴 Grafana
+
+Visualizes analytics and observability metrics.
+
+### Responsibilities
+
+* Operational dashboards
+* Live metrics visualization
+* Real-time monitoring
+
+---
+
+# 📡 API Endpoints
+
+## 📊 Metrics API
+
+```http
 GET /metrics
+```
 
-Returns:
+### Returns
 
-log level distribution
-service distribution
-analytics summaries
-Search Endpoint
+* Log level distribution
+* Service distribution
+* Aggregated analytics
+* Operational summaries
+
+---
+
+## 🔍 Search API
+
+```http
 GET /search?query=database
+```
 
-Example Response:
+### Example Response
 
+```json
 [
   {
     "service": "payment-service",
@@ -97,80 +204,133 @@ Example Response:
     "message": "Database connection timeout"
   }
 ]
-Anomaly Detection Endpoint
+```
+
+---
+
+## 🚨 Anomaly Detection API
+
+```http
 GET /analytics/anomalies
+```
 
-Example Response:
+### Example Response
 
+```json
 [
   {
     "type": "HIGH_ERROR_RATE",
     "message": "Error percentage exceeded 40%"
   }
 ]
-Running the Project
-Prerequisites
-Docker
-Docker Compose
-Java 21
-Maven
-Start Entire Platform
+```
 
-From the docker directory:
+---
 
+# 🐳 Running the Platform
+
+## ✅ Prerequisites
+
+* Docker
+* Docker Compose
+* Java 21
+* Maven
+
+---
+
+## ▶️ Start Entire Platform
+
+From the `docker` directory:
+
+```bash
 docker compose up
-Stop Platform
+```
+
+---
+
+## ⏹️ Stop Platform
+
+```bash
 docker compose down
-Dockerized Services
+```
 
-The platform runs the following containers:
+---
 
-Zookeeper
-Kafka
-PostgreSQL
-Producer Service
-Processing Engine
-Grafana
-Grafana Dashboard
+# 📦 Dockerized Services
 
-Grafana is available at:
+| Service           | Purpose                 |
+| ----------------- | ----------------------- |
+| Zookeeper         | Kafka coordination      |
+| Kafka             | Event streaming         |
+| PostgreSQL        | Log persistence         |
+| Producer Service  | Log generation          |
+| Processing Engine | Analytics & APIs        |
+| Grafana           | Dashboard visualization |
 
+---
+
+# 📈 Grafana Dashboard Access
+
+Grafana runs at:
+
+```text
 http://localhost:3000
+```
 
-Default credentials:
+## Default Credentials
 
+```text
 Username: admin
 Password: admin
-Testing
+```
+
+---
+
+# 🧪 Testing
 
 Run unit tests:
 
+```bash
 ./mvnw test
+```
 
-Tests include:
+## Covered Tests
 
-analytics service tests
-anomaly detection tests
-Key Engineering Concepts Demonstrated
-Event-driven architecture
-Distributed systems
-Real-time stream processing
-Search indexing
-Observability engineering
-Container orchestration
-REST API design
-Backend testing
-Future Improvements
-Persistent Lucene index
-Advanced search filters
-Time-series analytics
-Alerting system
-Kubernetes deployment
-Prometheus integration
-Screenshots
+* Analytics service logic
+* Error aggregation
+* Anomaly detection validation
+* Mocked dependency testing
+
+---
+
+# 🧠 Engineering Concepts Demonstrated
+
+* Distributed systems architecture
+* Event-driven design
+* Real-time stream processing
+* Search indexing systems
+* Observability engineering
+* REST API design
+* Docker orchestration
+* Backend service testing
+* Asynchronous processing
+
+---
+
+# 🔮 Future Improvements
+
+* Persistent Lucene index storage
+* Advanced search filters
+* Time-series analytics
+* Prometheus integration
+* Alerting system
+* Kubernetes deployment
+* Authentication & RBAC
+
+---
+
+# 👨‍💻 Author
+
+**Monish Gowda**
 
 
-
-Author
-
-Monish Gowda
