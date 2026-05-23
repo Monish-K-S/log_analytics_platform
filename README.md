@@ -69,7 +69,6 @@ This platform ingests streaming logs, processes analytics in real time, detects 
 
 ## 🔍 Lucene Search API
 
-![Search API](screenshots/search_results.png)
 
 ---
 
