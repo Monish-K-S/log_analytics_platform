@@ -30,6 +30,7 @@ import org.apache.lucene.document.StringField;
         private final Directory directory = new ByteBuffersDirectory();
         private final Analyzer analyzer = new StandardAnalyzer();
 
+
         public void indexLog(LogEntity logEntity)throws IOException{
         Document document = new Document();
         document.add(new TextField("service", logEntity.getService(), Field.Store.YES));

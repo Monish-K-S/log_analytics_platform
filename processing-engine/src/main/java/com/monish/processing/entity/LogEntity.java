@@ -4,9 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+
 import java.time.LocalDateTime;
 
 @Entity
+
+
 public class LogEntity {
 
     @Id
@@ -20,7 +24,6 @@ public class LogEntity {
     private String host;
 
     public LogEntity() {}
-
     public void setId(Long id) {
         this.id = id;
     }
